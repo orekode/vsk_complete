@@ -17,8 +17,19 @@
 }
 
 .vsk_root .flex_12,
-.vsk_root .flex-center_12 {
+.vsk_root .flex-center_12,
+.vsk_root .flex-col_12, 
+.vsk_root .flex-col-center_12 {
     display: flex;
+}
+
+.vsk_root .flex-col_12,
+.vsk_root .flex-col-center_12 {
+    flex-direction: column;
+}
+
+.vsk_root .flex-col-center_12 {
+    justify-content: center;
 }
 
 .vsk_root .align-center_12,
@@ -119,6 +130,8 @@
     }
 
 }
+
+
 
 @media only screen and (max-width: 550px) {
 

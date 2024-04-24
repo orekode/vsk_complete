@@ -1,28 +1,26 @@
 <?php
-    require_once('../config.php');
-    require_once( $CFG->libdir . '/filelib.php' );
-    // require_login();
-    $courses = get_courses();
-    
-    function get_course_image($course_id)
-    {
-       global $COURSE;
-       $url = '';
+require_once '../config.php';
+require_once $CFG->libdir.'/filelib.php';
+// require_login();
+$courses = get_courses();
 
-       $context = context_course::instance( $course_id );
-       $fs = get_file_storage();
-       $files = $fs->get_area_files( $context->id, 'course', 'overviewfiles', 0 );
+function get_course_image($course_id)
+{
+    global $COURSE;
+    $url = '';
 
-       foreach ( $files as $f )
-       {
-         if ( $f->is_valid_image() )
-         {
-            $url = moodle_url::make_pluginfile_url( $f->get_contextid(), $f->get_component(), $f->get_filearea(), null, $f->get_filepath(), $f->get_filename(), false );
-         }
-       }
+    $context = context_course::instance($course_id);
+    $fs = get_file_storage();
+    $files = $fs->get_area_files($context->id, 'course', 'overviewfiles', 0);
 
-       return $url;
+    foreach ($files as $f) {
+        if ($f->is_valid_image()) {
+            $url = moodle_url::make_pluginfile_url($f->get_contextid(), $f->get_component(), $f->get_filearea(), null, $f->get_filepath(), $f->get_filename(), false);
+        }
     }
+
+    return $url;
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@
 
     <section class="side_spacing_12" style="margin: 0;">
 
-        <div class="title_102 font-bold_102 flex_12 space_between_12" style="padding-bottom: 2rem;">
+        <div class="title_102 search_parent_102 font-bold_102 flex_12 space_between_12" style="padding-bottom: 2rem;">
             <h1 class="font-bold_102">Popular Courses</h1>
 
             <div class="search-box_102">
@@ -58,18 +56,18 @@
 
 
         <div class="card-box_12 flex_12 justify-center_12">
-                    <?php 
-                    
-                    foreach($courses as $course): 
+                    <?php
+
+                    foreach ($courses as $course) {
                         $duration = format_time($course_info->duration);
-                        $course_url = get_course_image($course->id) ?? "./shalom/images/new_way2.jpg";
-                        
-                        $course_url = $course_url == "" ? "./shalom/images/new_way2.jpg" : $course_url;
+                        $course_url = get_course_image($course->id) ?? './shalom/images/new_way2.jpg';
+
+                        $course_url = $course_url == '' ? './shalom/images/new_way2.jpg' : $course_url;
                         $course_context = context_course::instance($course->id);
                         $teachers = get_role_users(3, $course_context);
-                        
-                        // var_dump( $course_url );
-                    ?>
+
+                        var_dump($course_url);
+                        ?>
 
                     <div class="card_12">
                         <div class="image_12">
@@ -77,30 +75,30 @@
                         </div>
                         <div class="card-content_12">
                             <div class="short-title_12 flex_12 space_between_12">
-                                <h4><?php echo $course->shortname ?></h4>
-                                <span><?php echo $duration ?></span>
+                                <h4><?php echo $course->shortname; ?></h4>
+                                <span><?php echo $duration; ?></span>
                             </div>
 
-                            <h2><?php echo $course->fullname ?></h2>
+                            <h2><?php echo $course->fullname; ?></h2>
 
                             <div class="instructor_12">
                                 <div class="icon_12 flex-center_12"></div>
                                 <div class="name_12"><?php
-                                    if (!empty($teachers)) {
-                                        foreach ($teachers as $teacher) {
-                                            echo "{$teacher->firstname} {$teacher->lastname}";
-                                            break;
+                                        if (!empty($teachers)) {
+                                            foreach ($teachers as $teacher) {
+                                                echo "{$teacher->firstname} {$teacher->lastname}";
+                                                break;
+                                            }
+                                        } else {
+                                            echo 'Vskuul';
                                         }
-                                    } else {
-                                        echo "Vskuul";
-                                    }
-                                
-                                ?></div>
+
+                        ?></div>
                             </div>
                         </div>
                     </div>
                     
-                    <?php endforeach; ?>
+                    <?php }?>
 
                 </div>
 

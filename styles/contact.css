@@ -4,13 +4,20 @@
     font-size: 300%;
 }
 
-.vsk_root .button_12, .vsk_root input, .vsk_root textarea {
+.vsk_root .button_12, .vsk_root input, .vsk_root textarea, .vsk_root select {
     border: 1px solid #888;
     border-radius: 10px;
-    padding: .5rem 1rem;
-    margin-bottom: 0.85rem;
+    padding: .65rem 1rem;
+    /* margin-bottom: 0.85rem; */
     width: 300px;
     gap: 0.65rem;
+}
+
+.vsk_root .error_102 {
+    margin-bottom: 0.85rem;
+    font-size: 80%;
+    font-weight: bold;
+    color: red;
 }
 
 .vsk_root .button_12 .icon_12 {
@@ -18,7 +25,8 @@
 }
 
 .vsk_root input,
-.vsk_root textarea {
+.vsk_root textarea,
+.vsk_root select {
     width: 100%;
 }
 
@@ -41,6 +49,27 @@
     display: none;
 }
 
+.vsk_root .grid_3_102 {
+    display: grid;
+    grid-template-columns: 160px 2fr 160px;
+}
+
+.vsk_root .grid_3_102 img {
+    height: 100% !important;
+    overflow: visible;
+}
+
+.vsk_root form {
+    background: white;
+    box-shadow: 0 0 5px #99999951;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    padding: 1rem 2rem;
+}
+
+
+
 @media only screen and (max-width: 770px) {
     .vsk_root .grid-split_12.split {
         grid-template-columns: 1fr;
@@ -49,4 +78,27 @@
     .vsk_root .close_1 {
         display: block;
     }
+
+    
+}
+
+@media only screen and (max-width: 775px) {
+
+    .vsk_root .grid_3_102 {
+        display: block;
+    }
+
+    .vsk_root * {
+        text-align: left !important;
+    }
+
+    .vsk_root button {
+        text-align: center !important;
+    }
+
+    .vsk_root .grid_3_102 > div:nth-of-type(1),
+    .vsk_root .grid_3_102 > div:nth-of-type(3) {
+        display: none;
+    }
+
 }

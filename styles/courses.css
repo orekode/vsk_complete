@@ -21,7 +21,7 @@
     gap: 0.5rem;
 }
 
-.vsk_root select, .vsk_root input {
+.vsk_root select, .vsk_root input, .vsk_root select {
     --size: 38px;
     background: white;
     border-radius: 10px;
@@ -68,4 +68,33 @@
     --size: 40px;
     border: 1px solid #bdbdbd58;
     border-radius: 10px;
+}
+
+
+@media only screen and (max-width: 860px) {
+    .search_parent_102 {
+        display: block !important;
+    }
+    
+    .search-box_102 {
+        margin-top: 1.5rem;
+    }
+
+    .search_parent_102 .search_102 {
+        width: 100%;
+    }
+
+    .search_102 input {
+        width: calc(100% - 45px);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .search-box_102 {
+        flex-direction: column-reverse;
+    }
+
+    .search-box_102 .category_filter_102 {
+        width: 100%;
+    }
 }

@@ -31,6 +31,8 @@
                         <div class="value_12">0508809987</div>
                     </div>
 
+                    <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
+
                     <div class="button_12 number_12 flex_12 align-center_12">
                         <div class="icon_12 hw_12 flex-center_12">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
@@ -39,6 +41,8 @@
                         </div>
                         <div class="value_12">info@vskuul.com</div>
                     </div>
+
+                    <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
 
                     <div class="button_12 number_12 flex_12 align-center_12">
                         <div class="icon_12 hw_12 flex-center_12">
@@ -61,27 +65,32 @@
                         <div class="input">
                             <label for="first_name">First Name</label>
                             <input type="text" name="first_name">
+                            <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
                         </div>
 
                         <div class="input">
                             <label for="last_name">Last Name</label>
                             <input type="text" name="last_name">
+                            <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
                         </div>
                     </div>
 
                     <div class="input">
                         <label for="last_name">Email</label>
                         <input type="text" name="email">
+                        <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
                     </div>
 
                     <div class="input">
                         <label for="last_name">Phone Number</label>
                         <input type="text" name="phone_number">
+                        <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
                     </div>
 
                     <div class="input">
                         <label for="last_name">Message</label>
                         <textarea type="text" name="last_name"></textarea>
+                        <div class="error_102"><?php echo $feeback['type'] ?? ''; ?></div>
                     </div>
 
                     <div class="btn_12" style="width: 100%;">

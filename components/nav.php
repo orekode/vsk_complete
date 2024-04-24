@@ -1,5 +1,5 @@
 
-<?php $base_url = ''; ?>
+<?php $base_url = '/vsk_complete'; ?>
 
 <nav class="flex_12 side_spacing_12 space_between_12 align-center_12">
         <div class="logo_12 hw_12 title_12">
@@ -15,9 +15,9 @@
                 </div>
             </div>
             <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/'">Home</div>
-            <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/shalom/courses.php'">Our Courses</div>
-            <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/shalom/about.php'">About</div>
-            <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/shalom/contact.php'">Contact Us</div>
+            <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/courses.php'">Our Courses</div>
+            <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/about.php'">About</div>
+            <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/contact.php'">Contact Us</div>
             <div class="nav_item_12" onclick="location.href='https://vskuul.com/login/index.php'">Log In</div>
             <div class="btn_12 close_12">
                 <button>Register Now</button>
@@ -28,7 +28,7 @@
         <div class="flex_12 align-center_12" style="gap: 0.5rem">
 
             <div class="btn_12 dsk">
-                <button onclick="location.href='<?php echo $base_url; ?>/shalom/register.php'">Register Now</button>
+                <button onclick="location.href='<?php echo $base_url; ?>/register.php'">Register Now</button>
             </div>
 
             <div class="close_12">
