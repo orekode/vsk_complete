@@ -1,0 +1,166 @@
+
+
+.vsk_root section {
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+.vsk_root section .bg_12 {
+    --size: 100%;
+    background: #ffdba645;
+    position: absolute;
+    top: 0;
+    left:0;
+    z-index: 0;
+}
+
+.vsk_root section .content_12 {
+    /* background: #000000cd; */
+    backdrop-filter: blur(55px);
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.vsk_root section .bg_12 .center-orange_12 {
+    --size: 500px;
+    background: #ffcb7c73;
+    border-radius: 50%;
+}
+
+.vsk_root .grid-split_12 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.vsk_root .semi-bold_12 {
+    font-weight: bold;
+    font-size: 280%;
+    line-height: 1;
+}
+
+.vsk_root .list-content_12 {
+    --size: 40px;
+    margin-top: 1.5rem;
+}
+
+.vsk_root .icon_12 {
+    background: #ffcb7c;
+    border-radius: 50%;
+}
+
+.vsk_root .list-content_12 .list_12 {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.vsk_root .list-content_12 .list_12 .text_12 {
+    width: calc(100% - var(--size));
+    font-weight: 600;
+    opacity: 0.9
+}
+
+.vsk_root .card-box_12 {
+    gap: 1rem;
+}
+
+.vsk_root .card_12 {
+    border: 1px solid #00000023;
+    border-radius: 10px;
+    padding: 0.65rem;
+    width: 300px;
+}
+
+.vsk_root .card_12:hover {
+    scale: 1.02;
+}
+
+.vsk_root .card_12:active {
+    scale: 0.95;
+}
+
+.vsk_root .card_12 .image_12 {
+    border: 1px solid #787878;
+    border-radius: 10px;
+    height: 250px;
+    margin-bottom: 1rem;
+    overflow:hidden;
+}
+
+.vsk_root .card-content_12 {
+    font-size: 80%;
+}
+
+.vsk_root .card-content_12 h2 {
+    line-height: 1;
+    margin: 0.75rem 0;
+}
+
+.vsk_root .pricing_card_12 {
+    border: 1px solid #111;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 350px;
+}
+
+.vsk_root .pricing_card_12 .price_12 {
+    font-size: 500%;
+    font-weight: 900;
+    line-height: 1;
+    /* margin-top: 0.95rem; */
+}
+
+.vsk_root .pricing_card_12 .desc_12 {
+    font-size: 80%;
+    font-weight: 700;
+    margin-top: 0.95rem;
+
+}
+
+.vsk_root .pricing_card_12 .sm-list_12 {
+    --size: 25px;
+    font-size: 80%;
+    font-weight: 400;
+    margin-top: 0.95rem;
+}
+
+.vsk_root .pricing_card_12 .sm-list_12 .sm-icon_12 {
+    background: #ffcb7c;
+    border-radius: 50%;
+}
+
+.vsk_root .pricing_card_12 .sm-list_12 .sm-item_12 {
+    width: calc(100% - var(--size));
+}
+
+.vsk_root .pricing_card_12 .sm-list-item_12 {
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.vsk_root .pricing-box {
+    gap: 3rem;
+}
+
+@media only screen and (max-width: 1220px) {
+    .vsk_root .card-box_12, .vsk_root .pricing-box {
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .vsk_root .grid-split_12.split_21 {
+        grid-template-columns: 5fr 4fr;
+    }
+    
+}
+
+@media only screen and (max-width: 820px) {
+    .vsk_root .grid-split_12.split_21 {
+        grid-template-columns: 5fr;
+    }
+    
+}

@@ -1,0 +1,133 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: .3s;
+    font-family: "Poppins", sans-serif;
+}
+
+@font-face {
+    font-family: 'suiii';
+    src: url('../font.otf');
+}
+
+.vsk_root .title_12 {
+    font-family: 'suiii';
+    font-family: "Kanit", sans-serif;
+}
+
+.vsk_root .flex_12,
+.vsk_root .flex-center_12 {
+    display: flex;
+}
+
+.vsk_root .align-center_12,
+.vsk_root .flex-center_12 {
+    align-items: center;
+}
+
+.vsk_root .justify-center_12,
+.vsk_root .flex-center_12 {
+    justify-content: center;
+}
+
+.vsk_root .space_between_12 {
+    justify-content: space-between;
+}
+
+.vsk_root .hw_12 {
+    height: var(--size);
+    width: var(--size);
+}
+
+.vsk_root .h_12 {
+    height: var(--size);
+}
+
+.vsk_root .w_12 {
+    width: var(--size);
+}
+
+
+.vsk_root .side_spacing_12 {
+    --space: 5rem;
+    padding-left: var(--space);
+    padding-right: var(--space);
+}
+
+.vsk_root .btn_12 {
+    --bg: black;
+    --color: white;
+    --shadow: lightgray;
+    border: 1px solid var(--bg);
+    border-radius: 5px;
+    width: max-content;
+
+    /* padding: 0.5rem; */
+}
+
+.vsk_root .btn_12 button {
+    background: var(--bg);
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px var(--shadow);
+    color: var(--color);
+    font-family: inherit;
+    font-weight: 600;
+    padding: .85rem 2rem;
+    position: relative;
+    top: -5px;
+    left: -5px;
+
+}
+
+.vsk_root .btn_12:hover button {
+    top: -2.5px;
+    left: -2.5px;
+    transition: .15s;
+}
+
+.vsk_root .btn_12:active button {
+    top: 0;
+    left: 0;
+}
+
+.vsk_root .obj-cover_12 {
+    --size: 100%;
+    object-fit: cover;
+}
+
+.vsk_root .obj-contain_12 {
+    --size: 100%;
+    object-fit: contain;
+}
+
+.vsk_root .ov-hide_12 {
+    overflow:hidden;
+}
+
+.vsk_root .text-center_12 {
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 990px) {
+
+    .vsk_root .side_spacing_12 {
+        --space: 3rem;
+        
+    }
+
+}
+
+@media only screen and (max-width: 550px) {
+
+    .vsk_root .side_spacing_12 {
+        --space: 1.5rem;
+    }
+
+    .vsk_root nav .dsk {
+        display:none;
+    }
+
+}

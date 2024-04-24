@@ -1,0 +1,52 @@
+
+
+.vsk_root .title_12.contact_12 {
+    font-size: 300%;
+}
+
+.vsk_root .button_12, .vsk_root input, .vsk_root textarea {
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: .5rem 1rem;
+    margin-bottom: 0.85rem;
+    width: 300px;
+    gap: 0.65rem;
+}
+
+.vsk_root .button_12 .icon_12 {
+    --size: 35px;
+}
+
+.vsk_root input,
+.vsk_root textarea {
+    width: 100%;
+}
+
+.vsk_root textarea {
+    height: 150px;
+}
+
+.vsk_root form label {
+    font-size: 90%;
+    font-weight: bold;
+}
+
+.vsk_root .input {
+    display:flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
+
+.vsk_root .close_1 {
+    display: none;
+}
+
+@media only screen and (max-width: 770px) {
+    .vsk_root .grid-split_12.split {
+        grid-template-columns: 1fr;
+    }
+
+    .vsk_root .close_1 {
+        display: block;
+    }
+}

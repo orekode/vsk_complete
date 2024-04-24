@@ -1,0 +1,71 @@
+
+.vsk_root .container_102 > .title_102 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vsk_root .container_102 > .title_102 h1 {
+    font-weight: 600;
+    font-size: 250%;
+}
+
+
+.vsk_root .search_box_102 {
+    border: 1px solid;
+}
+
+.vsk_root .search-box_102 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vsk_root select, .vsk_root input {
+    --size: 38px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 1px #bdbdbd58;
+    border: 1px solid #e1e1e15d;
+    height: var(--size);
+    padding: 0.45rem;
+    min-width: 150px;
+    outline: none;
+}
+
+
+.vsk_root select:focus, .vsk_root input:focus {
+    /* box-shadow: 0 0 5px #6c89ff5d; */
+    border: 2px solid #2853ff;
+}
+
+.vsk_root .icon_btn_102 {
+    --size: 38px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 10px;
+
+}
+
+
+.vsk_root .btn_102 {
+    outline: none;
+    border: none;
+}
+
+.vsk_root .flex_12.end {
+    justify-content: end;
+}
+
+.vsk_root .page-box {
+    justify-self: end;
+    width: max-content;
+    padding: 0.75rem;
+    gap: 0.5rem;
+}
+
+.vsk_root .page-box .page {
+    --size: 40px;
+    border: 1px solid #bdbdbd58;
+    border-radius: 10px;
+}
