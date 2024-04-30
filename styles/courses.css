@@ -43,10 +43,16 @@
     --size: 38px;
     height: var(--size);
     width: var(--size);
+    border: none;
+    box-shadow: 0 0 2px lightgray;
     border-radius: 10px;
-
+    background: #33b160;
+    color: white;
 }
 
+vsk_root .icon_btn_102:active {
+    scale: 0.95;
+}
 
 .vsk_root .btn_102 {
     outline: none;
@@ -70,6 +76,41 @@
     border-radius: 10px;
 }
 
+
+.vsk_root .search-result {
+    background: white;
+    border: 1px solid lightgray;
+    box-shadow: 0 0 5px lightgray;
+    display: none;
+    opacity: 0;
+    height: max-content;
+    max-height: 320px;
+    border-radius: 10px;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.vsk_root .search-result.active {
+    display: block;
+}
+
+.vsk_root .search-result.visible {
+    opacity: 1;
+}
+
+.vsk_root .search-result .load-me {
+    display: none;
+    height: 300px;
+}
+
+.vsk_root .search-result .load-me.active {
+    display: block;
+}
+
+.vsk_root .search-result .school:hover {
+    background: #33b160;
+    color: white;
+}
 
 @media only screen and (max-width: 860px) {
     .search_parent_102 {

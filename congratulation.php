@@ -80,5 +80,5 @@ if (!isset($_SESSION['registered']) or !$_SESSION['registered']) {
         </div>
     </section>
 </body>
-
+<?php require_once './components/footer.php'; ?>
 </html>

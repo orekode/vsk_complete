@@ -122,6 +122,37 @@
 }
 
 
+.vsk_root .abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.vsk_root .relative {
+    position: relative;
+}
+
+.vsk_root .absolute {
+    position: absolute;
+}
+
+.vsk_root .top-full {
+    top: 110%;
+}
+
+.vsk_root .left-0 {
+    left: 0
+}
+
+.vsk_root .w-full {
+    width: 100%;
+}
+
+.vsk_root .h-full {
+    height: 100%;
+}
+
 @media only screen and (max-width: 990px) {
 
     .vsk_root .side_spacing_12 {

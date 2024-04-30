@@ -112,7 +112,7 @@ function get_course_image($course_id)
 
     </section>
 </body>
-
+<?php require_once './components/footer.php'; ?>
 <script>
 
     function toggle(target, className='active') {

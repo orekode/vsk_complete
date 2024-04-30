@@ -117,7 +117,7 @@ $types = $types->fetch_all(MYSQLI_ASSOC);
         </div>
     </section>
 </body>
-
+<?php require_once './components/footer.php'; ?>
 <script>
 
     function toggle(target, className='active') {

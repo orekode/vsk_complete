@@ -6,13 +6,11 @@ require './conn.php';
 
 $random = bin2hex(random_bytes(32));
 $_SESSION['csrf'] = $random;
-$feeback = $_SESSION['feedback'] ?? [];
+$feedback = $_SESSION['feedback'] ?? [];
 
 $query = 'select *, (select name from Countries where id = country) as ctr, (select name from school_type where id = type) as typ from schools';
-$query = $conn->prepare($query);
-$query->execute();
-$schools = $query->get_result();
-$schools = $schools->fetch_all(MYSQLI_ASSOC);
+$data = (object) get_records($query, per_page: 15);
+$schools = $data->data;
 
 ?>
 
@@ -25,6 +23,7 @@ $schools = $schools->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="./styles/courses.css">
     <link rel="stylesheet" href="./styles/contact.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./scripts/search.js" defer></script>
 
     <style>
         .school_12 {
@@ -42,7 +41,7 @@ $schools = $schools->fetch_all(MYSQLI_ASSOC);
             padding: 1rem;
         }
 
-        .badge.pending {
+        .badge {
             background: orange;
             padding: 0.25rem 0.5rem;
             border-radius: 10px;
@@ -52,9 +51,17 @@ $schools = $schools->fetch_all(MYSQLI_ASSOC);
             color: white;
         }
 
+        .badge.active {
+            background: green;
+        }
+
+        .badge.suspended {
+            background: red;
+        }
+
         .card_item .name {
             font-weight: bold;
-            font-size: 120%;
+            font-size: 150%;
             line-height: 1;
             padding: 0.75rem 0;
         }
@@ -99,14 +106,27 @@ $schools = $schools->fetch_all(MYSQLI_ASSOC);
         <div class="search-box_102">
             <div class="category_filter_102">
                 <select name="cource_category" id="">
-                    <option>Science</option>
-                    <option>Business</option>
-                    <option>Art</option>
+                    <option value="active">Active</option>
+                    <option value="suspended">Suspended</option>
+                    <option value="pending">Pending</option>
                 </select>
             </div>
-            <div class="search_102 flex_12">
-                <input type="text">
-                <button class="icon_btn_102" style="margin: 0 0.5rem;">sch</button>
+            <div class="search_102 flex_12 relative">
+                <input oninput="trigger_search(event);" type="text" style="width: calc(340px - 40px);">
+                <button class="icon_btn_102 flex-center_12" style="margin: 0 0.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+
+                <div class="absolute top-full left-0 w-full search-result ">
+                    <div class="result"></div>
+                    <div class="absolute loading load-me left-0 w-full flex-center_12" style="height: 100%; top: 0;">
+                        <div class="hw_12" style="--size: 100%;">
+                            <img src="./images/loader.gif" alt="" class="obj-contain_12 h-full w-full">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -114,55 +134,45 @@ $schools = $schools->fetch_all(MYSQLI_ASSOC);
     <section class="side_spacing_12" style="display: grid; grid-template-columns: repeat(auto-fit, 420px); gap: 1rem; margin: 0; padding-top: 2rem;">
         <?php foreach ($schools as $school) { ?>
             <div class="card_item">
-                <div class="top badge pending"><?php echo $school['state']; ?></div>
-                <div class="name"><?php echo $school['name']; ?> International School</div>
+                <div class="top badge <?php echo $school['state']; ?>"><?php echo $school['state']; ?></div>
+                <div class="name"><?php echo $school['name']; ?></div>
+                
 
-                <div class="details">
-                    <div class="detail">
-                        <?php echo $school['email']; ?>
-                    </div>
-
-                    <div class="detail">
-                        <?php echo $school['phone_number']; ?>
-                    </div>
-
-                    <div class="detail">
-                        <?php echo $school['ctr']; ?>
-                    </div>
-
-                    <div class="detail">
-                        <?php echo $school['typ']; ?>
-                    </div>
-
-                    <div class="detail">
-                        <?php echo $school['full_address']; ?>
-                    </div>
-
-                </div>
-                <div class="grid-split_12" style="margin-top: 0.75rem">
-                    <div class="btn_12" style="width: 100%; scale: 0.85;">
-                        <button style="width: 100%;">Suspend</button>
-                    </div>
-                    <div class="btn_12" style="width: 100%; scale: 0.85;">
-                        <button style="width: 100%; background: #33b160;">Approve</button>
+                <div class="" style="margin-top: 0.75rem">
+                    <div onclick=" location.href = '<?php echo './school.php?school='.$school['id']; ?>'; " class="btn_12" style="width: 100%;">
+                        <button style="width: 100%;">View School</button>
                     </div>
                 </div>
             </div>
         <?php } ?>
 
-        
+
     </section>
 
     <div class="side_spacing_12">
         <div class="flex_12 end">
             <div class="page-box flex_12">
-                <div class="page flex-center_12 hw_12">1</div>
-                <div class="page flex-center_12 hw_12">3</div>
-                <div class="page flex-center_12 hw_12">2</div>
+                <?php echo $data->links; ?>
             </div>
         </div>
     </div>
 
 </body>
+<?php require_once './components/footer.php'; ?>
+<script>
 
+    function toggle(target, className='active') {
+        let element = document.querySelector(target);
+        element.classList.toggle(className);
+    }
+
+
+    <?php if (isset($feedback['message'])) { ?>
+        Swal.fire({
+            icon: "<?php echo $feedback['icon']; ?>",
+            title: "<?php echo $feedback['message']; ?>",
+        });
+    <?php } $_SESSION['feedback'] = []; ?>
+
+</script>
 </html>

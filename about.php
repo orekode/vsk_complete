@@ -126,6 +126,8 @@
     </div>
 
     <!-- External JavaScript -->
+    
     <script src="script.js"></script>
 </body>
+<?php require_once './components/footer.php'; ?>
 </html>

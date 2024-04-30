@@ -102,6 +102,7 @@
         </div>
     </section>
 </body>
+<?php require_once './components/footer.php'; ?>
 
 <script>
 
