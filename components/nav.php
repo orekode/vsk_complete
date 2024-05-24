@@ -1,5 +1,7 @@
+<?php 
 
-<?php $base_url = '/vsk_complete'; ?>
+$base_url = '/school'; 
+?>
 
 <nav class="flex_12 side_spacing_12 space_between_12 align-center_12">
     <div class="logo_12 hw_12 title_12">
@@ -14,22 +16,37 @@
                 </svg>
             </div>
         </div>
+        
         <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/'">Home</div>
         <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/courses.php'">Our Courses</div>
         <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/about.php'">About</div>
         <div class="nav_item_12" onclick="location.href='<?php echo $base_url; ?>/contact.php'">Contact Us</div>
-        <div class="nav_item_12" onclick="location.href='https://vskuul.com/login/index.php'">Log In</div>
-        <div class="btn_12 close_12">
-            <button>Register Now</button>
-        </div>
+        <?php if(!isloggedin()): ?>
+            <div class="nav_item_12" onclick="location.href='https://vskuul.com/login/index.php'">Log In</div>
+            <div class="btn_12 close_12">
+                <button onclick="location.href='<?php echo $base_url; ?>/register.php'">>Register Now</button>
+            </div>
+        <?php else: ?>
+            <div class="btn_12 close_12">
+                <button onclick="location.href='https://vskuul.com/my'">>Dashboard</button>
+            </div>
+        <?php endif; ?>
     </div>
 
 
     <div class="flex_12 align-center_12" style="gap: 0.5rem">
+        
+        <?php if(!isloggedin()): ?>
+            <div class="btn_12 dsk">
+                <button onclick="location.href='<?php echo $base_url; ?>/register.php'">Register Now</button>
+            </div>
+        <?php else: ?>
+            <div class="btn_12 dsk">
+                <button onclick="location.href='https://vskuul.com/my'">Dashboard</button>
+            </div>
+        <?php endif; ?>
 
-        <div class="btn_12 dsk">
-            <button onclick="location.href='<?php echo $base_url; ?>/register.php'">Register Now</button>
-        </div>
+
 
         <div class="close_12">
             <div class="menu-btn_12 hw_12 flex-center_12" onclick="toggle('.vsk_root .nav-items_12')">

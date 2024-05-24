@@ -1,12 +1,12 @@
 <?php
+require_once '../config.php';
+// session_start();
 
-session_start();
-
-if (!isset($_SESSION['registered']) or !$_SESSION['registered']) {
-    header('Location: ./index.php');
-} else {
-    $_SESSION['registered'] = false;
-}
+// if (!isset($_SESSION['registered']) or !$_SESSION['registered']) {
+//     header('Location: ./index.php');
+// } else {
+//     $_SESSION['registered'] = false;
+// }
 
 ?>
 
@@ -72,7 +72,7 @@ if (!isset($_SESSION['registered']) or !$_SESSION['registered']) {
         <div class="flex-col-center_12">
             <h1>Welcome Aboard!</h1>
             <p>
-                Your registration has been successful. Your school is now part of our community of learners and educators. A representative will contact you through either your email or phone number with the status of your registration and your login credentials for access to the Learning Management System (LMS).
+                Your registration has been successful. Your school is now part of our community of learners and educators. A representative will contact you through your email or phone number with the status of your registration and your login credentials for access to the Learning Management System (LMS).
             </p>
             <div onclick="location.href = './about.php'" class="btn_12 close_12">
                 <button>Learn More</button>

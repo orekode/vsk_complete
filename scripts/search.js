@@ -1,4 +1,4 @@
-let root = "http://localhost/vsk_complete";
+let root = "http://vskuul.com/school";
 
 async function search_records(target, params) {
 
@@ -22,7 +22,7 @@ async function search_records(target, params) {
     return data
 }
 
-function trigger_search(search_event) {
+function trigger_search(search_event, target = "/search/school.php", key="name") {
     let search = search_event.target.value;
     let result_box = document.querySelector(".vsk_root .search-result");
     let loader = document.querySelector(".vsk_root .search-result .loading");
@@ -41,11 +41,11 @@ function trigger_search(search_event) {
     result = result_box.querySelector(".result");
     result.innerHTML = ""
 
-    search_records(root + "/search/school.php", {search}).then( schools => {
+    search_records(root + target, {search}).then( schools => {
         console.log(schools);
         schools.forEach( school => result.innerHTML += `
             <div onclick=" location.href = './school.php?school=${school.id}'; " class="school" style="font-weight: bold; padding: 0.75rem 1rem; cursor: pointer; ${school.id != schools[schools.length - 1].id ? "border-bottom: 1px solid lightgray;" : ""}">
-                ${school.name}
+                ${school[key]}
             </div>
         `)
 
@@ -59,4 +59,20 @@ function trigger_search(search_event) {
     });
 
 }
+
+function debounce(func, delay) {
+    let timeoutId;
+    
+    return function (...args) {
+        
+        clearTimeout(timeoutId);
+        
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+        
+    };
+}
+
+const debouncedSearch = debounce(trigger_search, 300);
 

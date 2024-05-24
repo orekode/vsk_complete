@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+require_once '../config.php';
 require './conn.php';
 
 $random = bin2hex(random_bytes(32));
@@ -19,7 +19,7 @@ $query = $conn->prepare($query);
 $query->execute();
 $types = $query->get_result();
 $types = $types->fetch_all(MYSQLI_ASSOC);
-// var_dump($countries);
+
 
 ?>
 
@@ -31,6 +31,8 @@ $types = $types->fetch_all(MYSQLI_ASSOC);
     <?php require_once './components/head.php'; ?>
     <link rel="stylesheet" href="./styles/contact.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./scripts/pay.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 <body class="vsk_root">
     <?php require_once './components/nav.php'; ?>
@@ -66,7 +68,7 @@ $types = $types->fetch_all(MYSQLI_ASSOC);
 
                     <div class="input">
                         <label for="email">Official Email</label>
-                        <input type="email" name="email">
+                        <input type="email" name="email" class="email-input">
                         <div class="error_102"><?php echo $feeback['name'] ?? ''; ?></div>
 
                     </div>
@@ -99,6 +101,17 @@ $types = $types->fetch_all(MYSQLI_ASSOC);
                         <label for="start_date">Preferred Start Date</label>
                         <input type="date" name="start_date">
                         <div class="error_102"><?php echo $feeback['start_date'] ?? ''; ?></div>
+                    </div>
+                    
+                    <div class="input">
+                        <label for="country">Plan</label>
+                        <select type="text" name="plan" class="plan-select">
+                            <option <?php if(!isset($_GET['plan']) or empty($_GET['plan'])) echo "selected"; ?> value="" disabled>click to choose</option>
+                            <option <?php if(isset($_GET['plan']) and $_GET['plan'] == "free") echo "selected"; ?> value="free">Free (30 days)</option>
+                            <option <?php if(isset($_GET['plan']) and $_GET['plan'] == "pro") echo "selected"; ?> value="pro">Pro (2 years) Ghc2300</option>
+                            <option <?php if(isset($_GET['plan']) and $_GET['plan'] == "enterprice") echo "selected"; ?> value="enterprice">Enterprice (6 years) Ghc5999</option>
+                        </select>
+                        <div class="error_102"><?php echo $feeback['plan'] ?? ''; ?></div>
                     </div>
 
                     <div class="btn_12" style="width: 100%; margin-top: 1rem;">

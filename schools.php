@@ -1,8 +1,8 @@
 <?php
 
-session_start();
-
 require './conn.php';
+require './isadmin.php';
+session_start();
 
 $random = bin2hex(random_bytes(32));
 $_SESSION['csrf'] = $random;

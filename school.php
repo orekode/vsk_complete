@@ -1,9 +1,7 @@
 <?php
-
-session_start();
-
 require './conn.php';
-
+require './isadmin.php';
+session_start();
 $feedback = $_SESSION['feedback'] ?? [];
 
 if (!isset($_GET['school'])) {

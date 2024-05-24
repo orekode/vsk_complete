@@ -4,15 +4,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'vskool';
-
 // $servername = 'localhost';
-// $username = 'u837965232_melEG';
-// $password = 'dLH2Nndh8z';
-// $database = 'u837965232_N1vss';
+// $username = 'root';
+// $password = '';
+// $database = 'vskool';
+
+$servername = 'localhost';
+$username = 'u837965232_melEG';
+$password = 'dLH2Nndh8z';
+$database = 'u837965232_N1vss';
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $database);
@@ -94,15 +94,6 @@ function get_where($fields, $table)
 
 function check_empties($fields)
 {
-    $fields = [
-        'name',
-        'email',
-        'type',
-        'phone_number',
-        'country',
-        'full_address',
-        'start_date',
-    ];
 
     $empties = [];
 

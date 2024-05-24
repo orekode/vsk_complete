@@ -1,8 +1,10 @@
 <?php
+require_once "./conn.php";
 require_once '../config.php';
 require_once $CFG->libdir.'/filelib.php';
 // require_login();
-$courses = get_courses();
+$data = get_records("select * from ekcd_course", per_page: 15);
+$courses = $data['data'];
 
 function get_course_image($course_id)
 {
@@ -30,6 +32,7 @@ function get_course_image($course_id)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require_once './components/head.php'; ?>
     <link rel="stylesheet" href="./styles/courses.css">
+    <script src="./scripts/search.js" defer></script>
 </head>
 <body class="vsk_root">
     <?php require_once './components/nav.php'; ?>
@@ -47,9 +50,23 @@ function get_course_image($course_id)
                         <option>Art</option>
                     </select>
                 </div>
-                <div class="search_102">
-                    <input type="text">
-                    <button class="icon_btn_102">sch</button>
+                <div class="search_102 flex_12 relative">
+                    <input oninput="debouncedSearch(event, '/search/course.php', 'fullname');" type="text" style="width: calc(340px - 40px);">
+                    
+                    <button class="icon_btn_102 flex-center_12" style="margin: 0 0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </button>
+    
+                    <div class="absolute top-full left-0 w-full search-result ">
+                        <div class="result"></div>
+                        <div class="absolute loading load-me left-0 w-full flex-center_12" style="height: 100%; top: 0;">
+                            <div class="hw_12" style="--size: 100%;">
+                                <img src="./images/loader.gif" alt="" class="obj-contain_12 h-full w-full">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,6 +76,10 @@ function get_course_image($course_id)
                     <?php
 
                     foreach ($courses as $course) {
+                        $course = (object) $course;
+                        if($course->category == "0") {
+                            continue;
+                        }
                         $duration = format_time($course_info->duration);
                         $course_url = get_course_image($course->id) ?? './shalom/images/new_way2.jpg';
 
@@ -66,10 +87,9 @@ function get_course_image($course_id)
                         $course_context = context_course::instance($course->id);
                         $teachers = get_role_users(3, $course_context);
 
-                        var_dump($course_url);
                         ?>
 
-                    <div class="card_12">
+                    <div class="card_12" onclick="location.href = 'https://vskuul.com/course/view.php?id=<?php echo $course->id; ?>'">
                         <div class="image_12">
                             <img src="<?php echo $course_url; ?>" class="obj-cover_12 hw_12">
                         </div>
@@ -102,13 +122,13 @@ function get_course_image($course_id)
 
                 </div>
 
-        <div class="flex_12 end">
-            <div class="page-box flex_12">
-                <div class="page flex-center_12 hw_12">1</div>
-                <div class="page flex-center_12 hw_12">3</div>
-                <div class="page flex-center_12 hw_12">2</div>
-            </div>
-        </div>
+                <div class="side_spacing_12">
+                    <div class="flex_12 end">
+                        <div class="page-box flex_12">
+                            <?php echo $data['links']; ?>
+                        </div>
+                    </div>
+                </div>
 
     </section>
 </body>

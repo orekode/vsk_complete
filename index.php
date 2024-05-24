@@ -1,12 +1,46 @@
+<?php
+    require_once('../config.php');
+    require_once( $CFG->libdir . '/filelib.php' );
+    // require_login();
+    $courses = get_courses();
+    
+    function get_course_image($course_id)
+    {
+       global $COURSE;
+       $url = '';
+
+       $context = context_course::instance( $course_id );
+       $fs = get_file_storage();
+       $files = $fs->get_area_files( $context->id, 'course', 'overviewfiles', 0 );
+
+       foreach ( $files as $f )
+       {
+         if ( $f->is_valid_image() )
+         {
+            $url = moodle_url::make_pluginfile_url( $f->get_contextid(), $f->get_component(), $f->get_filearea(), null, $f->get_filepath(), $f->get_filename(), false );
+         }
+       }
+
+       return $url;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php require_once './components/head.php'; ?>
+    <link rel="stylesheet" href="./styles/general.css">
+    <link rel="stylesheet" href="./styles/home_header.css">
+    <link rel="stylesheet" href="./styles/home_body.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>VSKUUL</title>
 </head>
 <body class="vsk_root">
+    
+
     <?php require_once './components/nav.php'; ?>
 
     <header>
@@ -45,7 +79,7 @@
                     </p>
 
                     <div class="btn_12">
-                        <button onclick="location.href='<?php echo $base_url; ?>/shalom/register.php'">Get Started Now</button>
+                        <button onclick="location.href='./register.php'">Get Started Now</button>
                     </div>
                 </div>
             </div>
@@ -120,12 +154,12 @@
                     </div>
 
                     <div class="btn_12" style="margin-top: 1.5rem;">
-                        <button onclick="location.href='<?php echo $base_url; ?>/shalom/register.php'">Join Us Today</button>
+                        <button onclick="location.href='/school/register.php'">Join Us Today</button>
                     </div>
                 </div>
 
                 <div class="right_12">
-                    <img src="./images/happy.png" class="obj-contain_12 hw_12">
+                    <img src="/school/images/happy.png" class="obj-contain_12 hw_12">
                 </div>
 
             </div>
@@ -135,82 +169,109 @@
 
 
                 <div class="card-box_12 flex_12 justify-center_12">
+                    <?php 
+                    
+                    foreach($courses as $course): 
+                        if($course->category == "0") {
+                            continue;
+                        }
+                        $duration = format_time($course_info->duration);
+                        $course_url = get_course_image($course->id) ?? "./school/images/new_way2.jpg";
+                        
+                        $course_url = $course_url == "" ? "/school/images/new_way2.jpg" : $course_url;
+                        $course_context = context_course::instance($course->id);
+                        $teachers = get_role_users(3, $course_context);
+                        
+                        // var_dump( $course_url );
+                    ?>
 
-                    <div class="card_12">
+                    <div class="card_12" onclick="location.href = 'https://vskuul.com/course/view.php?id=<?php echo $course->id; ?>'">
                         <div class="image_12">
-                            <img src="./images/new_way2.jpg" class="obj-cover_12 hw_12">
+                            <img src="<?php echo $course_url; ?>" class="obj-cover_12 hw_12">
                         </div>
                         <div class="card-content_12">
                             <div class="short-title_12 flex_12 space_between_12">
-                                <h4>Computer Graphics</h4>
-                                <span>6 Months</span>
+                                <h4><?php echo $course->shortname ?></h4>
+                                <span><?php echo $duration ?></span>
                             </div>
 
-                            <h2>Introduction to Computer Graphics 223</h2>
+                            <h2><?php echo $course->fullname ?></h2>
 
                             <div class="instructor_12">
                                 <div class="icon_12 flex-center_12"></div>
-                                <div class="name_12">Dr David Shalom</div>
+                                <div class="name_12"><?php
+                                    if (!empty($teachers)) {
+                                        foreach ($teachers as $teacher) {
+                                            echo "{$teacher->firstname} {$teacher->lastname}";
+                                            break;
+                                        }
+                                    } else {
+                                        echo "Vskuul";
+                                    }
+                                
+                                ?></div>
                             </div>
                         </div>
                     </div>
+                    
+                    <?php endforeach; ?>
 
-                    <div class="card_12">
-                        <div class="image_12">
-                            <img src="./images/new_way2.jpg" class="obj-cover_12 hw_12">
-                        </div>
-                        <div class="card-content_12">
-                            <div class="short-title_12 flex_12 space_between_12">
-                                <h4>Computer Graphics</h4>
-                                <span>6 Months</span>
-                            </div>
+                    <!--<div class="card_12">-->
+                    <!--    <div class="image_12">-->
+                    <!--        <img src="./school/images/new_way2.jpg" class="obj-cover_12 hw_12">-->
+                    <!--    </div>-->
+                    <!--    <div class="card-content_12">-->
+                    <!--        <div class="short-title_12 flex_12 space_between_12">-->
+                    <!--            <h4>Computer Graphics</h4>-->
+                    <!--            <span>6 Months</span>-->
+                    <!--        </div>-->
 
-                            <h2>Introduction to Computer Graphics 223</h2>
+                    <!--        <h2>Introduction to Computer Graphics 223</h2>-->
 
-                            <div class="instructor_12">
-                                <div class="icon_12 flex-center_12"></div>
-                                <div class="name_12">Dr David Shalom</div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--        <div class="instructor_12">-->
+                    <!--            <div class="icon_12 flex-center_12"></div>-->
+                    <!--            <div class="name_12">Dr David Shalom</div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
 
-                    <div class="card_12">
-                        <div class="image_12">
-                            <img src="./images/new_way2.jpg" class="obj-cover_12 hw_12">
-                        </div>
-                        <div class="card-content_12">
-                            <div class="short-title_12 flex_12 space_between_12">
-                                <h4>Computer Graphics</h4>
-                                <span>6 Months</span>
-                            </div>
+                    <!--<div class="card_12">-->
+                    <!--    <div class="image_12">-->
+                    <!--        <img src="./school/images/new_way2.jpg" class="obj-cover_12 hw_12">-->
+                    <!--    </div>-->
+                    <!--    <div class="card-content_12">-->
+                    <!--        <div class="short-title_12 flex_12 space_between_12">-->
+                    <!--            <h4>Computer Graphics</h4>-->
+                    <!--            <span>6 Months</span>-->
+                    <!--        </div>-->
 
-                            <h2>Introduction to Computer Graphics 223</h2>
+                    <!--        <h2>Introduction to Computer Graphics 223</h2>-->
 
-                            <div class="instructor_12">
-                                <div class="icon_12 flex-center_12"></div>
-                                <div class="name_12">Dr David Shalom</div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--        <div class="instructor_12">-->
+                    <!--            <div class="icon_12 flex-center_12"></div>-->
+                    <!--            <div class="name_12">Dr David Shalom</div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
 
-                    <div class="card_12">
-                        <div class="image_12">
-                            <img src="./images/new_way2.jpg" class="obj-cover_12 hw_12">
-                        </div>
-                        <div class="card-content_12">
-                            <div class="short-title_12 flex_12 space_between_12">
-                                <h4>Computer Graphics</h4>
-                                <span>6 Months</span>
-                            </div>
+                    <!--<div class="card_12">-->
+                    <!--    <div class="image_12">-->
+                    <!--        <img src="./school/images/new_way2.jpg" class="obj-cover_12 hw_12">-->
+                    <!--    </div>-->
+                    <!--    <div class="card-content_12">-->
+                    <!--        <div class="short-title_12 flex_12 space_between_12">-->
+                    <!--            <h4>Computer Graphics</h4>-->
+                    <!--            <span>6 Months</span>-->
+                    <!--        </div>-->
 
-                            <h2>Introduction to Computer Graphics 223</h2>
+                    <!--        <h2>Introduction to Computer Graphics 223</h2>-->
 
-                            <div class="instructor_12">
-                                <div class="icon_12 flex-center_12"></div>
-                                <div class="name_12">Dr David Shalom</div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--        <div class="instructor_12">-->
+                    <!--            <div class="icon_12 flex-center_12"></div>-->
+                    <!--            <div class="name_12">Dr David Shalom</div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
 
                 </div>
 
@@ -268,7 +329,7 @@
                 </div>
 
                 <div class="btn_12" style="margin-top: .95rem; width: 100%">
-                    <button style="width: 100%;">Join Us Today</button>
+                    <button style="width: 100%;" onclick="location.href='/school/register.php?plan=free'">Join Us Today</button>
                 </div>
 
             </div>
@@ -318,7 +379,7 @@
                 </div>
 
                 <div class="btn_12" style="margin-top: .95rem; width: 100%">
-                    <button style="width: 100%;" onclick="location.href='<?php echo $base_url; ?>/shalom/register.php'">Join Us Today</button>
+                    <button style="width: 100%;" onclick="location.href='/school/register.php?plan=pro'">Join Us Today</button>
                 </div>
 
             </div>
@@ -368,7 +429,7 @@
                 </div>
 
                 <div class="btn_12" style="margin-top: .95rem; width: 100%">
-                    <button onclick="location.href='<?php echo $base_url; ?>/shalom/register.php'" style="width: 100%;">Join Us Today</button>
+                    <button onclick="location.href='/school/register.php?plan=enterprice'" style="width: 100%;">Join Us Today</button>
                 </div>
 
             </div>
@@ -378,7 +439,6 @@
 
     </section>
 </body>
-<?php require_once './components/footer.php'; ?>
 
 <script>
 
