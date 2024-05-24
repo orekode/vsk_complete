@@ -1,25 +1,26 @@
 <?php
-    require_once('../config.php');
-    require_once( $CFG->libdir . '/filelib.php' );
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1);
+    // require_once('../config.php');
+    // require_once( $CFG->libdir . '/filelib.php' );
     // require_login();
-    $courses = get_courses();
+    // $courses = get_courses();
     
     function get_course_image($course_id)
     {
-       global $COURSE;
-       $url = '';
+    //    global $COURSE;
+       $url = 'image.jgp';
 
-       $context = context_course::instance( $course_id );
-       $fs = get_file_storage();
-       $files = $fs->get_area_files( $context->id, 'course', 'overviewfiles', 0 );
+    //    $context = context_course::instance( $course_id );
+    //    $fs = get_file_storage();
+    //    $files = $fs->get_area_files( $context->id, 'course', 'overviewfiles', 0 );
 
-       foreach ( $files as $f )
-       {
-         if ( $f->is_valid_image() )
-         {
-            $url = moodle_url::make_pluginfile_url( $f->get_contextid(), $f->get_component(), $f->get_filearea(), null, $f->get_filepath(), $f->get_filename(), false );
-         }
-       }
+    //    foreach ( $files as $f )
+    //    {
+    //      if ( $f->is_valid_image() )
+    //      {
+    //         $url = moodle_url::make_pluginfile_url( $f->get_contextid(), $f->get_component(), $f->get_filearea(), null, $f->get_filepath(), $f->get_filename(), false );
+    //      }
+    //    }
 
        return $url;
     }
@@ -170,17 +171,32 @@
 
                 <div class="card-box_12 flex_12 justify-center_12">
                     <?php 
+
+                    $courses = [];
+
+                    array_push($courses, (object)[
+                        "id" => 1,
+                        "category" => 1,
+                        "shortname" => 'abs',
+                        "fullname" => 'David Shalom',
+                    ]);
                     
                     foreach($courses as $course): 
                         if($course->category == "0") {
                             continue;
                         }
-                        $duration = format_time($course_info->duration);
+                        $duration = "now"; //format_time($course_info->duration);
                         $course_url = get_course_image($course->id) ?? "./school/images/new_way2.jpg";
                         
                         $course_url = $course_url == "" ? "/school/images/new_way2.jpg" : $course_url;
-                        $course_context = context_course::instance($course->id);
-                        $teachers = get_role_users(3, $course_context);
+                        // $course_context = context_course::instance($course->id);
+                        // $teachers = get_role_users(3, $course_context);
+                        $teachers = [];
+
+                        array_push($teachers, (object)[
+                            "firstname" => 'Divine',
+                            "lastname" => 'Osei'
+                        ]);
                         
                         // var_dump( $course_url );
                     ?>

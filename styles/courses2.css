@@ -1,0 +1,54 @@
+.vsk_root aside{
+    width: 100%;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+
+
+aside .card{
+    border: 1px solid rgba(128, 128, 128, 0.67);
+    margin: 2rem 3rem;
+    padding: .5rem;
+    height: 25rem;
+    width: 18rem;
+    border-radius: .5rem;
+    
+}
+
+.card .image{
+    height: 17rem;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.462);
+    border-radius: .5rem;
+
+
+}
+
+.card span{
+    display: flex;
+    justify-content: space-between;
+     margin-top: 7%;
+ }
+
+ span h6{
+    font-size: 15px;
+ }
+ span p{
+    font-size: 14px;
+ }
+
+.card .info{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin-top: .5rem;
+}
+
+.info p{
+    font-size: 14px;
+}

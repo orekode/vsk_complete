@@ -25,8 +25,7 @@
 // }
 
  
-$target = $_GET['target'] ?? 'levels';
-$base_url = "/vsk_complete";
+ 
 
 
 ?>
@@ -130,115 +129,49 @@ $base_url = "/vsk_complete";
         </div>
         <aside>
 
-        <?php
+        <div class="card">
+            <div class="image">
 
-
-            $levels = [
-                [
-                    "shortname" => "shs",
-
-                    "name" => "Senior High School",
-                    "start" => 1,
-                    'end' => 3,
-                    'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Saint_Thomas_Aquinas_SHS_01.jpg/500px-Saint_Thomas_Aquinas_SHS_01.jpgs'
-                ],
-                [
-                    "shortname" => "jhs",
-                    "name" => "Junior High School",
-                    "start" => 1,
-                    'end' => 3,
-                    'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.christiancouncilofghana.org%2FNewsPages%2FJHS-students-to-spend-only-four-hours-in-school-daily-GES.php&psig=AOvVaw385PYoZUlm_OOa8dQQ2mKf&ust=1716665460042000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODqpKmDp4YDFQAAAAAdAAAAABAE'
-                ],
-                [
-                    "shortname" => "basic",
-                    "name" => "Primary School",
-                    "start" => 1,
-                    'end' => 6,
-                    'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftheconversation.com%2Fwhy-do-kids-have-to-go-to-school-184612&psig=AOvVaw1oqR77dhJU8Hcpq5XZ2aw3&ust=1716665505643000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiDtr-Dp4YDFQAAAAAdAAAAABAJ'
-
-                ],
-                [
-                    "shortname" => "kg",
-                    "name" => "Kindergarten",
-                    "start" => 1,
-                    'end' => 2,
-                    'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fthe-primary-school&psig=AOvVaw1oqR77dhJU8Hcpq5XZ2aw3&ust=1716665505643000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiDtr-Dp4YDFQAAAAAdAAAAABAE'
-                ],
-            ];
-
-            $classes = [
-
-            ];
-
-
-
-
-
-
-            $target_map = [
-                "levels" => $levels,
-                "shs" => [
-                    'max' => 3,
-                    'name' => 'Senior High School',
-                    'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Saint_Thomas_Aquinas_SHS_01.jpg/500px-Saint_Thomas_Aquinas_SHS_01.jpgs'
-                ],
-                "jhs" => [
-                    'max' => 3,
-                    'name' => 'Junior High School',
-                    'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.christiancouncilofghana.org%2FNewsPages%2FJHS-students-to-spend-only-four-hours-in-school-daily-GES.php&psig=AOvVaw385PYoZUlm_OOa8dQQ2mKf&ust=1716665460042000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODqpKmDp4YDFQAAAAAdAAAAABAE'
-                ],
-                "basic" => [
-                    'max' => 6,
-                    'name' => 'Primary School',
-                    'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftheconversation.com%2Fwhy-do-kids-have-to-go-to-school-184612&psig=AOvVaw1oqR77dhJU8Hcpq5XZ2aw3&ust=1716665505643000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiDtr-Dp4YDFQAAAAAdAAAAABAJ'
-                ],
-                "kg" => [
-                    'max' => 2,
-                    'name' => 'Kindergarten',
-                    'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fthe-primary-school&psig=AOvVaw1oqR77dhJU8Hcpq5XZ2aw3&ust=1716665505643000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiDtr-Dp4YDFQAAAAAdAAAAABAE',
-                ],
-            ];
-
-        ?>
-
-        <?php if($target == "levels"): foreach($levels as $level): $level = (object)$level?>
-
-        <div onclick="location.href = '<?php echo $base_url . '/quizes.php?target=' . $level->shortname; ?>'" class="card">
-            <div class="image" style="overflow: hidden;">
-                <img src="<?php echo $level->image ?? "https://images.theconversation.com/files/471234/original/file-20220627-12-wphbh4.jpg?ixlib=rb-4.1.0&rect=0%2C0%2C2700%2C1665&q=45&auto=format&w=926&fit=clip"; ?>" style="height: 100%; width: 100%; object-fit: cover;" /> 
             </div>
             <span>
-                <h6><?php echo $level->shortname; ?></h6>
-                <p></p>
+                <h6>SHS</h6>
+                <p>now</p>
             </span>
             <div class="info">
-                <h3><?php echo $level->name;  ?></h3>
-                <p>SPAN: <?php echo $level->start; ?> - <?php echo $level->end; ?></p>
+                <h3>Senior High School</h3>
+                <p>SPAN: 1 - 3</p>
             </div>
 
         </div>
-        
-        <?php endforeach; endif; ?>
-
-        <?php if($target != "levels"): for($i = 0; $i < $target_map[$target]['max']; $i++):?>
-
-            <div onclick="location.href = '<?php echo $base_url . '/courses.php'; ?>'"  class="card">
-                <div class="image">
-
-                </div>
-                <span>
-                    <h6><?php echo $target; ?></h6>
-                    <p></p>
-                </span>
-                <div class="info">
-                    <h3><?php $num= $i + 1; echo $target_map[$target]['name'] . " " . $num; ?></h3>
-                </div>
+        <div class="card">
+            <div class="image">
 
             </div>
+            <span>
+                <h6>JHS</h6>
+                <p>now</p>
+            </span>
+            <div class="info">
+                <h3>Junior High School</h3>
+                <p>SPAN: 1 - 3</p>
+            </div>
 
-        <?php endfor; endif; ?>
+        </div>
+       
+        <div class="card">
+            <div class="image">
 
+            </div>
+            <span>
+                <h6>sdf</h6>
+                <p>now</p>
+            </span>
+            <div class="info">
+                <h3>Primary School</h3>
+                <p>SPAN: 1 - 6</p>
+            </div>
 
+        </div>
 
 
 
